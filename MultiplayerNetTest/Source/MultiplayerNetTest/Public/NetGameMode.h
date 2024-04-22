@@ -14,42 +14,6 @@ class ANavigationObjectBase;
 class AMultiplayerNetTestCharacter;
 
 
-
-
-
-UENUM(BlueprintType)
-enum class EConnection_State : uint8 {
-	Connecting,
-	Connected,
-	Disconnected
-};
-
-USTRUCT(BlueprintType)
-struct FClientHandle {
-
-	GENERATED_BODY()
-
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	AClient* Controller;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int32 Id = 0;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FName Name = FName(TEXT(""));
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	EConnection_State connectionState = EConnection_State::Connecting;
-};
-
-
-UDELEGATE(BlueprintAuthorityOnly)
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FJoined, FClientHandle, Player);
-
-UDELEGATE(BlueprintAuthorityOnly)
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLeaving, FClientHandle, LeavingPlayer);
-
 /**
  * 
  */
@@ -63,39 +27,38 @@ protected:
 
 	ANetGameMode();
 
-	UFUNCTION(BlueprintCallable)
-	void OnPlayerLogin(const APlayerController* PlayerLogingIn);
-	
+	//UFUNCTION(BlueprintCallable)
+	//void OnPlayerLogin(AClient* PlayerLogingIn);
+	//
 
-	UFUNCTION(BlueprintCallable)
-	void OnLevelTransition(const APlayerController* NewPC);
+	//UFUNCTION(BlueprintCallable)
+	//void OnLevelTransition(const APlayerController* NewPC);
 
-	UFUNCTION(BlueprintCallable)
-	void OnPlayerRemoving(const APlayerController* LeavingPlayer);
+	//UFUNCTION(BlueprintCallable)
+	//void OnPlayerRemoving(const APlayerController* LeavingPlayer);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	bool IsThisPlayerAccounted(APlayerController* controller);
+	//UFUNCTION(BlueprintCallable)
+	//bool IsThisPlayerAccounted(APlayerController* controller);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	TArray<FClientHandle> GetPlayers();
+	//UFUNCTION(BlueprintCallable, BlueprintPure)
+	//TArray<FClientHandle> GetPlayers();
 
-	UFUNCTION(BlueprintCallable)
-	FClientHandle GetPlayerHandle(const APlayerController* Player);
+	//UFUNCTION(BlueprintCallable)
+	//FClientHandle GetPlayerHandle(const APlayerController* Player);
+
+	//UFUNCTION(BlueprintCallable)
+	//void ReplaceHandle(const APlayerController* Controller, FClientHandle NewHandle);
+
+
+	////Returns the Index of the Controller, if not found returns -1
+	//int32 FindClientHandle(int32 IdOfController);
 public:
 
 
-	UPROPERTY(VisibleAnywhere, Category = Network)
-	TArray<FClientHandle> ActivePlayers;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Network)
+	TArray<APlayerController*> ActiveControllers;
 
-	UPROPERTY(BlueprintAssignable)
-	FJoined PlayerJoinedEvent;
-
-	UPROPERTY(BlueprintAssignable)
-	FLeaving PlayerLeavingEvent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Server Info")
 	TSoftObjectPtr<AActor> SpawnLocationReference;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Server Info")
-	TSubclassOf<AMultiplayerNetTestCharacter> CharacterRef;
 };

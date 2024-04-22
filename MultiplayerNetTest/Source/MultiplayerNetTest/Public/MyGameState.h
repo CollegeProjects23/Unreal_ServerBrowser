@@ -10,7 +10,6 @@
 
 class ANetGameMode;
 class AClient;
-struct FClientHandle;
 
 
 /**
@@ -28,10 +27,5 @@ protected:
 
 
 	//These are binded to delegates on the BP
-	UFUNCTION(BlueprintCallable)
-	void OnPlayerJoined(FClientHandle JoingingClient);
-
-	UFUNCTION(BlueprintCallable)
-	void OnPlayerLeaving(FClientHandle LeavingClient);
 
 };

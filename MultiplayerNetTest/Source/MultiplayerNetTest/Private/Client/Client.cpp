@@ -2,9 +2,12 @@
 
 
 #include "Client/Client.h"
-
 #include "Kismet\GameplayStatics.h"
 #include "NetGameMode.h"
+
+AClient::AClient()
+{
+}
 
 void AClient::SignalIfLoggedIn()
 {

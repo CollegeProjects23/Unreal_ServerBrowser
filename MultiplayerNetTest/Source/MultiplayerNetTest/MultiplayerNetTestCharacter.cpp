@@ -108,6 +108,10 @@ void AMultiplayerNetTestCharacter::Move(const FInputActionValue& Value)
 		// add movement 
 		AddMovementInput(ForwardDirection, MovementVector.Y);
 		AddMovementInput(RightDirection, MovementVector.X);
+
+		if (GEngine) {
+			GEngine->AddOnScreenDebugMessage(1, 10, FColor::Red, FString(TEXT("Moving")));
+		}
 	}
 }
 
@@ -123,7 +127,3 @@ void AMultiplayerNetTestCharacter::Look(const FInputActionValue& Value)
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
 }
-
-
-
-

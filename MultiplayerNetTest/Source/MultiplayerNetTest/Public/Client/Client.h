@@ -6,9 +6,6 @@
 #include "GameFramework/PlayerController.h"
 #include "Client.generated.h"
 
-
-class ANetGameMode;
-
 /**
  * 
  */
@@ -19,15 +16,15 @@ class MULTIPLAYERNETTEST_API AClient : public APlayerController
 	
 public:
 
+	
+
+protected:
+
+	AClient();
+
 	UFUNCTION(BlueprintCallable)
 	void SignalIfLoggedIn();
 
 	UFUNCTION(BlueprintCallable)
 	void SignalIfSuccessfulLevelTransfer();
-
-	UPROPERTY(VisibleAnywhere, Category = "ClientInfo")
-	int32 Id = 0;
-
-protected:
-
 };
